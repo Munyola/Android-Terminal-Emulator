@@ -15,124 +15,124 @@
  * limitations under the License.
 -->
 <resources>
-   <string name="application_terminal">Емулатор терминала</string>
-   <string name="preferences">Поставке</string>
-   <string name="new_window">Нови прозор</string>
-   <string name="close_window">Затвори прозор</string>
-   <string name="window_list">Прозори</string>
-   <string name="prev_window">Прет. прозор</string>
-   <string name="next_window">След. прозор</string>
-   <string name="reset">Поново постави терм</string>
-   <string name="send_email">Пошаљи е-поштом</string>
-   <string name="special_keys">Посебни тастери</string>
-   <string name="toggle_soft_keyboard">Пребаци софтверску тастатуру</string>
+  <string name="application_terminal">Емулатор терминала</string>
+  <string name="preferences">Поставке</string>
+  <string name="new_window">Нови прозор</string>
+  <string name="close_window">Затвори прозор</string>
+  <string name="window_list">Прозори</string>
+  <string name="prev_window">Прет. прозор</string>
+  <string name="next_window">След. прозор</string>
+  <string name="reset">Поново постави терм</string>
+  <string name="send_email">Пошаљи е-поштом</string>
+  <string name="special_keys">Посебни тастери</string>
+  <string name="toggle_soft_keyboard">Пребаци софтверску тастатуру</string>
 
-   <string name="reset_toast_notification">Стање терминала овог прозора је поново постављено.</string>
+  <string name="reset_toast_notification">Стање терминала овог прозора је поново постављено.</string>
 
-   <string name="enable_wakelock">Узми блокаду буђења</string>
-   <string name="disable_wakelock">Отпусти блокаду буђења</string>
-   <string name="enable_wifilock">Узми блокаду бежичног</string>
-   <string name="disable_wifilock">Отпусти блокаду бежичног</string>
+  <string name="enable_wakelock">Узми блокаду буђења</string>
+  <string name="disable_wakelock">Отпусти блокаду буђења</string>
+  <string name="enable_wifilock">Узми блокаду бежичног</string>
+  <string name="disable_wifilock">Отпусти блокаду бежичног</string>
 
-   <string name="edit_text">Уреди текст</string>
-   <string name="select_text">Изабери текст</string>
-   <string name="copy_all">Копирај све</string>
-   <string name="paste">Налепи</string>
-   <string name="send_control_key">Пошаљи Цтрл унос</string>
-   <string name="send_fn_key">Пошаљи Фн унос</string>
+  <string name="edit_text">Уреди текст</string>
+  <string name="select_text">Изабери текст</string>
+  <string name="copy_all">Копирај све</string>
+  <string name="paste">Налепи</string>
+  <string name="send_control_key">Пошаљи Цтрл унос</string>
+  <string name="send_fn_key">Пошаљи Фн унос</string>
 
-   <string name="window_title">Прозор %1$d</string>
+  <string name="window_title">Прозор %1$d</string>
 
-   <string name="service_notify_text">Сесија терминала је у току</string>
+  <string name="service_notify_text">Сесија терминала је у току</string>
 
-   <string name="process_exit_message">Сесија терминала је завршена</string>
+  <string name="process_exit_message">Сесија терминала је завршена</string>
 
-   <!-- Preference dialog -->
-   <string name="screen_preferences">Екран</string>
+  <!-- Preference dialog -->
+  <string name="screen_preferences">Екран</string>
 
-   <string name="title_statusbar_preference">Трака стања</string>
-   <string name="summary_statusbar_preference">Прикажи/сакриј траку стања.</string>
-   <string name="dialog_title_statusbar_preference">Трака стања</string>
+  <string name="title_statusbar_preference">Трака стања</string>
+  <string name="summary_statusbar_preference">Прикажи/сакриј траку стања.</string>
+  <string name="dialog_title_statusbar_preference">Трака стања</string>
 
-   <string name="title_actionbar_preference">Трака радњи</string>
-   <string name="summary_actionbar_preference">Одредите понашање траке радњи (Андроид 3.0 и новији).</string>
-   <string name="dialog_title_actionbar_preference">Понашање траке радњи</string>
+  <string name="title_actionbar_preference">Трака радњи</string>
+  <string name="summary_actionbar_preference">Одредите понашање траке радњи (Андроид 3.0 и новији).</string>
+  <string name="dialog_title_actionbar_preference">Понашање траке радњи</string>
 
-   <string name="title_orientation_preference">Оријентација екрана</string>
-   <string name="summary_orientation_preference">Одредите понашање оријентације екрана.</string>
-   <string name="dialog_title_orientation_preference">Оријентација екрана</string>
+  <string name="title_orientation_preference">Оријентација екрана</string>
+  <string name="summary_orientation_preference">Одредите понашање оријентације екрана.</string>
+  <string name="dialog_title_orientation_preference">Оријентација екрана</string>
 
-   <string name="title_cursorstyle_preference">Стил курсора</string>
-   <string name="summary_cursorstyle_preference">Изаберите стил курсора.</string>
-   <string name="dialog_title_cursorstyle_preference">Стил курсора</string>
+  <string name="title_cursorstyle_preference">Стил курсора</string>
+  <string name="summary_cursorstyle_preference">Изаберите стил курсора.</string>
+  <string name="dialog_title_cursorstyle_preference">Стил курсора</string>
 
-   <string name="title_cursorblink_preference">Трептање курсора</string>
-   <string name="summary_cursorblink_preference">Одредите трептање курсора.</string>
-   <string name="dialog_title_cursorblink_preference">Трептање курсора</string>
+  <string name="title_cursorblink_preference">Трептање курсора</string>
+  <string name="summary_cursorblink_preference">Одредите трептање курсора.</string>
+  <string name="dialog_title_cursorblink_preference">Трептање курсора</string>
 
-   <string name="text_preferences">Текст</string>
+  <string name="text_preferences">Текст</string>
 
-   <string name="title_utf8_by_default_preference">Подразумевај УТФ-8</string>
-   <string name="summary_utf8_by_default_preference">Да ли је УТФ-8 режим подразумевано омогућен.</string>
+  <string name="title_utf8_by_default_preference">Подразумевај УТФ-8</string>
+  <string name="summary_utf8_by_default_preference">Да ли је УТФ-8 режим подразумевано омогућен.</string>
 
-   <string name="title_fontsize_preference">Величина фонта</string>
-   <string name="summary_fontsize_preference">Одредите величину фонта у тачкама.</string>
-   <string name="dialog_title_fontsize_preference">Величина фонта</string>
+  <string name="title_fontsize_preference">Величина фонта</string>
+  <string name="summary_fontsize_preference">Одредите величину фонта у тачкама.</string>
+  <string name="dialog_title_fontsize_preference">Величина фонта</string>
 
-   <string name="title_color_preference">Боје</string>
-   <string name="summary_color_preference">Изаберите боју текста.</string>
-   <string name="dialog_title_color_preference">Боја текста</string>
+  <string name="title_color_preference">Боје</string>
+  <string name="summary_color_preference">Изаберите боју текста.</string>
+  <string name="dialog_title_color_preference">Боја текста</string>
 
-   <string name="keyboard_preferences">Тастатура</string>
+  <string name="keyboard_preferences">Тастатура</string>
 
-   <string name="title_backaction_preference">Понашање дугмета за назад</string>
-   <string name="summary_backaction_preference">Шта ће да деси притиском на дугме за назад.</string>
-   <string name="dialog_title_backaction_preference">Понашање дугмета за назад</string>
+  <string name="title_backaction_preference">Понашање дугмета за назад</string>
+  <string name="summary_backaction_preference">Шта ће да деси притиском на дугме за назад.</string>
+  <string name="dialog_title_backaction_preference">Понашање дугмета за назад</string>
 
-   <string name="title_controlkey_preference">Контрол тастер</string>
-   <string name="summary_controlkey_preference">Изаберите контрол (Цтрл) тастер.</string>
-   <string name="dialog_title_controlkey_preference">Контрол тастер</string>
+  <string name="title_controlkey_preference">Контрол тастер</string>
+  <string name="summary_controlkey_preference">Изаберите контрол (Цтрл) тастер.</string>
+  <string name="dialog_title_controlkey_preference">Контрол тастер</string>
 
-   <string name="title_fnkey_preference">Фн тастер</string>
-   <string name="summary_fnkey_preference">Изаберите функцијски (Фн) тастер.</string>
-   <string name="dialog_title_fnkey_preference">Фн тастер</string>
+  <string name="title_fnkey_preference">Фн тастер</string>
+  <string name="summary_fnkey_preference">Изаберите функцијски (Фн) тастер.</string>
+  <string name="dialog_title_fnkey_preference">Фн тастер</string>
 
-   <string name="title_ime_preference">Метода уноса</string>
-   <string name="summary_ime_preference">Изаберите методу уноса за софтверску тастатуру.</string>
-   <string name="dialog_title_ime_preference">Метода уноса</string>
+  <string name="title_ime_preference">Метода уноса</string>
+  <string name="summary_ime_preference">Изаберите методу уноса за софтверску тастатуру.</string>
+  <string name="dialog_title_ime_preference">Метода уноса</string>
 
-   <string name="shell_preferences">Шкољка</string>
-   <string name="title_shell_preference">Командна линија</string>
-   <string name="summary_shell_preference">Одредите командну линију шкољке.</string>
-   <string name="dialog_title_shell_preference">Шкољка</string>
+  <string name="shell_preferences">Шкољка</string>
+  <string name="title_shell_preference">Командна линија</string>
+  <string name="summary_shell_preference">Одредите командну линију шкољке.</string>
+  <string name="dialog_title_shell_preference">Шкољка</string>
 
-   <string name="title_initialcommand_preference">Почетна наредба</string>
-   <string name="summary_initialcommand_preference">Наредба послата шкољки по покретању.</string>
-   <string name="dialog_title_initialcommand_preference">Почетна наредба</string>
+  <string name="title_initialcommand_preference">Почетна наредба</string>
+  <string name="summary_initialcommand_preference">Наредба послата шкољки по покретању.</string>
+  <string name="dialog_title_initialcommand_preference">Почетна наредба</string>
 
-   <string name="title_termtype_preference">Тип терминала</string>
-   <string name="summary_termtype_preference">Који тип терминала да буде пријављен шкољки.</string>
-   <string name="dialog_title_termtype_preference">Тип терминала</string>
+  <string name="title_termtype_preference">Тип терминала</string>
+  <string name="summary_termtype_preference">Који тип терминала да буде пријављен шкољки.</string>
+  <string name="dialog_title_termtype_preference">Тип терминала</string>
 
-   <string name="title_close_window_on_process_exit_preference">Затвори прозор по излазу</string>
-   <string name="summary_close_window_on_process_exit_preference">Да ли да прозор буде затворен по излазу из његове шкољке.</string>
+  <string name="title_close_window_on_process_exit_preference">Затвори прозор по излазу</string>
+  <string name="summary_close_window_on_process_exit_preference">Да ли да прозор буде затворен по излазу из његове шкољке.</string>
 
-   <string name="title_verify_path_preference">Овери PATH уносе</string>
-   <string name="summary_verify_path_preference">Да ли да недоступни директоријуми буду уклољени из PATH.</string>
+  <string name="title_verify_path_preference">Овери PATH уносе</string>
+  <string name="summary_verify_path_preference">Да ли да недоступни директоријуми буду уклољени из PATH.</string>
 
-   <string name="title_do_path_extensions_preference">Дозволи PATH проширења</string>
-   <string name="summary_do_path_extensions_preference">Да ли осталим апликацијама дозволити додавање додатне наредбе (да додају у PATH).</string>
+  <string name="title_do_path_extensions_preference">Дозволи PATH проширења</string>
+  <string name="summary_do_path_extensions_preference">Да ли осталим апликацијама дозволити додавање додатне наредбе (да додају у PATH).</string>
 
-   <string name="title_allow_prepend_path_preference">Дозволи PATH префиксе</string>
-   <string name="summary_allow_prepend_path_preference">Да ли осталим апликацијама дозволити премошћавање постојеће наредбе (да додају на почетку PATH).</string>
+  <string name="title_allow_prepend_path_preference">Дозволи PATH префиксе</string>
+  <string name="summary_allow_prepend_path_preference">Да ли осталим апликацијама дозволити премошћавање постојеће наредбе (да додају на почетку PATH).</string>
 
-   <string name="title_home_path_preference">Домаћа фасцикла</string>
-   <string name="summary_home_path_preference">Путања до уписиве фасцикле која ће бити коришћена као HOME.</string>
+  <string name="title_home_path_preference">Домаћа фасцикла</string>
+  <string name="summary_home_path_preference">Путања до уписиве фасцикле која ће бити коришћена као HOME.</string>
 
-   <string name="control_key_dialog_title">Контролни и функцијски тастери</string>
-   <!-- The word CTRLKEY should be left un-translated. It will be replaced at run-time with the
-        actual control key key name. -->
-   <string name="control_key_dialog_control_text">CTRLKEY Размак : Control-@ (NUL)\nCTRLKEY A..Z : Control-A..Z\nCTRLKEY 5 : Control-]\nCTRLKEY 6 : Control-^\nCTRLKEY 7 : Control-_\nCTRLKEY 9 : F11\nCTRLKEY 0 : F12</string>
+  <string name="control_key_dialog_title">Контролни и функцијски тастери</string>
+  <!-- The word CTRLKEY should be left un-translated. It will be replaced at run-time with the
+       actual control key key name. -->
+  <string name="control_key_dialog_control_text">CTRLKEY Размак : Control-@ (NUL)\nCTRLKEY A..Z : Control-A..Z\nCTRLKEY 5 : Control-]\nCTRLKEY 6 : Control-^\nCTRLKEY 7 : Control-_\nCTRLKEY 9 : F11\nCTRLKEY 0 : F12</string>
   <string name="control_key_dialog_control_disabled_text">Контролни тастер није постављен.</string>
   <!-- The word FNKEY should be left un-translated. It will be replaced at run-time with the
        actual function key key name. -->
@@ -164,7 +164,7 @@
   <string name="use_keyboard_shortcuts_summary_off">Пречице тастатуре су онемогућене.</string>
 
   <string name="help">Помоћ</string>
-    <string name="activity_term_here_title">Терминал овде</string>
+  <string name="activity_term_here_title">Терминал овде</string>
   <!-- BEGIN SHORTCUT RELATED STRINGS -->
   <!-- AndroidManifest.xml -->
   <string name="activity_shortcut_create">"Терминалска пречица"</string>

@@ -17,8 +17,8 @@
 package jackpal.androidterm.util;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import jackpal.androidterm.emulatorview.TermSession;
 import jackpal.androidterm.emulatorview.UpdateCallback;
@@ -28,126 +28,127 @@ import jackpal.androidterm.emulatorview.UpdateCallback;
  * order to be notified when the list is changed.
  */
 @SuppressWarnings("serial")
-public class SessionList extends ArrayList<TermSession>
-{
-    LinkedList<UpdateCallback> callbacks = new LinkedList<UpdateCallback>();
-    LinkedList<UpdateCallback> titleChangedListeners = new LinkedList<UpdateCallback>();
-    UpdateCallback mTitleChangedListener = new UpdateCallback() {
-        public void onUpdate() {
-            notifyTitleChanged();
-        }
-    };
+public class SessionList extends ArrayList<TermSession> {
 
-    public SessionList() {
-        super();
-    }
+  LinkedList<UpdateCallback> callbacks = new LinkedList<UpdateCallback>();
+  LinkedList<UpdateCallback> titleChangedListeners = new LinkedList<UpdateCallback>();
+  UpdateCallback mTitleChangedListener = new UpdateCallback() {
 
-    public SessionList(int capacity) {
-        super(capacity);
+    public void onUpdate() {
+      notifyTitleChanged();
     }
+  };
 
-    public void addCallback(UpdateCallback callback) {
-        callbacks.add(callback);
-        callback.onUpdate();
-    }
+  public SessionList() {
+    super();
+  }
 
-    public boolean removeCallback(UpdateCallback callback) {
-        return callbacks.remove(callback);
-    }
+  public SessionList(int capacity) {
+    super(capacity);
+  }
 
-    private void notifyChange() {
-        for (UpdateCallback callback : callbacks) {
-            callback.onUpdate();
-        }
-    }
+  public void addCallback(UpdateCallback callback) {
+    callbacks.add(callback);
+    callback.onUpdate();
+  }
 
-    public void addTitleChangedListener(UpdateCallback listener) {
-        titleChangedListeners.add(listener);
-        listener.onUpdate();
-    }
+  public boolean removeCallback(UpdateCallback callback) {
+    return callbacks.remove(callback);
+  }
 
-    public boolean removeTitleChangedListener(UpdateCallback listener) {
-        return titleChangedListeners.remove(listener);
+  private void notifyChange() {
+    for (UpdateCallback callback : callbacks) {
+      callback.onUpdate();
     }
+  }
 
-    private void notifyTitleChanged() {
-        for (UpdateCallback listener : titleChangedListeners) {
-            listener.onUpdate();
-        }
-    }
+  public void addTitleChangedListener(UpdateCallback listener) {
+    titleChangedListeners.add(listener);
+    listener.onUpdate();
+  }
 
-    @Override
-    public boolean add(TermSession object) {
-        boolean result = super.add(object);
-        object.setTitleChangedListener(mTitleChangedListener);
-        notifyChange();
-        return result;
-    }
+  public boolean removeTitleChangedListener(UpdateCallback listener) {
+    return titleChangedListeners.remove(listener);
+  }
 
-    @Override
-    public void add(int index, TermSession object) {
-        super.add(index, object);
-        object.setTitleChangedListener(mTitleChangedListener);
-        notifyChange();
+  private void notifyTitleChanged() {
+    for (UpdateCallback listener : titleChangedListeners) {
+      listener.onUpdate();
     }
+  }
 
-    @Override
-    public boolean addAll(Collection <? extends TermSession> collection) {
-        boolean result = super.addAll(collection);
-        for (TermSession session : collection) {
-            session.setTitleChangedListener(mTitleChangedListener);
-        }
-        notifyChange();
-        return result;
-    }
+  @Override
+  public boolean add(TermSession object) {
+    boolean result = super.add(object);
+    object.setTitleChangedListener(mTitleChangedListener);
+    notifyChange();
+    return result;
+  }
 
-    @Override
-    public boolean addAll(int index, Collection <? extends TermSession> collection) {
-        boolean result = super.addAll(index, collection);
-        for (TermSession session : collection) {
-            session.setTitleChangedListener(mTitleChangedListener);
-        }
-        notifyChange();
-        return result;
-    }
+  @Override
+  public void add(int index, TermSession object) {
+    super.add(index, object);
+    object.setTitleChangedListener(mTitleChangedListener);
+    notifyChange();
+  }
 
-    @Override
-    public void clear() {
-        for (TermSession session : this) {
-            session.setTitleChangedListener(null);
-        }
-        super.clear();
-        notifyChange();
+  @Override
+  public boolean addAll(Collection<? extends TermSession> collection) {
+    boolean result = super.addAll(collection);
+    for (TermSession session : collection) {
+      session.setTitleChangedListener(mTitleChangedListener);
     }
+    notifyChange();
+    return result;
+  }
 
-    @Override
-    public TermSession remove(int index) {
-        TermSession object = super.remove(index);
-        if (object != null) {
-            object.setTitleChangedListener(null);
-            notifyChange();
-        }
-        return object;
+  @Override
+  public boolean addAll(int index, Collection<? extends TermSession> collection) {
+    boolean result = super.addAll(index, collection);
+    for (TermSession session : collection) {
+      session.setTitleChangedListener(mTitleChangedListener);
     }
+    notifyChange();
+    return result;
+  }
 
-    @Override
-    public boolean remove(Object object) {
-        boolean result = super.remove(object);
-        if (result && object instanceof TermSession) {
-            ((TermSession) object).setTitleChangedListener(null);
-            notifyChange();
-        }
-        return result;
+  @Override
+  public void clear() {
+    for (TermSession session : this) {
+      session.setTitleChangedListener(null);
     }
+    super.clear();
+    notifyChange();
+  }
 
-    @Override
-    public TermSession set(int index, TermSession object) {
-        TermSession old = super.set(index, object);
-        object.setTitleChangedListener(mTitleChangedListener);
-        if (old != null) {
-            old.setTitleChangedListener(null);
-        }
-        notifyChange();
-        return old;
+  @Override
+  public TermSession remove(int index) {
+    TermSession object = super.remove(index);
+    if (object != null) {
+      object.setTitleChangedListener(null);
+      notifyChange();
     }
+    return object;
+  }
+
+  @Override
+  public boolean remove(Object object) {
+    boolean result = super.remove(object);
+    if (result && object instanceof TermSession) {
+      ((TermSession) object).setTitleChangedListener(null);
+      notifyChange();
+    }
+    return result;
+  }
+
+  @Override
+  public TermSession set(int index, TermSession object) {
+    TermSession old = super.set(index, object);
+    object.setTitleChangedListener(mTitleChangedListener);
+    if (old != null) {
+      old.setTitleChangedListener(null);
+    }
+    notifyChange();
+    return old;
+  }
 }

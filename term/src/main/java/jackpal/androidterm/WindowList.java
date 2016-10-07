@@ -36,128 +36,130 @@ import jackpal.androidterm.compat.AndroidCompat;
 import jackpal.androidterm.util.SessionList;
 
 public class WindowList extends ListActivity {
-    private SessionList sessions;
-    private WindowListAdapter mWindowListAdapter;
-    private TermService mTermService;
 
-    /**
-     * View which isn't automatically in the pressed state if its parent is
-     * pressed.  This allows the window's entry to be pressed without the close
-     * button being triggered.
-     * Idea and code shamelessly borrowed from the Android browser's tabs list.
-     *
-     * Used by layout xml.
-     */
-    public static class CloseButton extends ImageView {
-        public CloseButton(Context context) {
-            super(context);
-        }
+  private SessionList sessions;
+  private WindowListAdapter mWindowListAdapter;
+  private TermService mTermService;
+  private ServiceConnection mTSConnection = new ServiceConnection() {
 
-        public CloseButton(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public CloseButton(Context context, AttributeSet attrs, int style) {
-            super(context, attrs, style);
-        }
-
-        @Override
-        public void setPressed(boolean pressed) {
-            if (pressed && ((View) getParent()).isPressed()) {
-                return;
-            }
-            super.setPressed(pressed);
-        }
+    public void onServiceConnected(ComponentName className, IBinder service) {
+      TermService.TSBinder binder = (TermService.TSBinder) service;
+      mTermService = binder.getService();
+      populateList();
     }
 
-    private ServiceConnection mTSConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            TermService.TSBinder binder = (TermService.TSBinder) service;
-            mTermService = binder.getService();
-            populateList();
-        }
-
-        public void onServiceDisconnected(ComponentName arg0) {
-            mTermService = null;
-        }
-    };
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        ListView listView = getListView();
-        View newWindow = getLayoutInflater().inflate(R.layout.window_list_new_window, listView, false);
-        listView.addHeaderView(newWindow, null, true);
-
-        setResult(RESULT_CANCELED);
-
-        // Display up indicator on action bar home button
-        if (AndroidCompat.SDK >= 11) {
-            ActionBarCompat bar = ActivityCompat.getActionBar(this);
-            if (bar != null) {
-                bar.setDisplayOptions(ActionBarCompat.DISPLAY_HOME_AS_UP, ActionBarCompat.DISPLAY_HOME_AS_UP);
-            }
-        }
+    public void onServiceDisconnected(ComponentName arg0) {
+      mTermService = null;
     }
+  };
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+  @Override
+  public void onCreate(Bundle icicle) {
+    super.onCreate(icicle);
 
-        Intent TSIntent = new Intent(this, TermService.class);
-        if (!bindService(TSIntent, mTSConnection, BIND_AUTO_CREATE)) {
-            Log.w(TermDebug.LOG_TAG, "bind to service failed!");
-        }
+    ListView listView = getListView();
+    View newWindow = getLayoutInflater().inflate(R.layout.window_list_new_window, listView, false);
+    listView.addHeaderView(newWindow, null, true);
+
+    setResult(RESULT_CANCELED);
+
+    // Display up indicator on action bar home button
+    if (AndroidCompat.SDK >= 11) {
+      ActionBarCompat bar = ActivityCompat.getActionBar(this);
+      if (bar != null) {
+        bar.setDisplayOptions(ActionBarCompat.DISPLAY_HOME_AS_UP, ActionBarCompat.DISPLAY_HOME_AS_UP);
+      }
     }
+  }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+  @Override
+  protected void onResume() {
+    super.onResume();
 
-        WindowListAdapter adapter = mWindowListAdapter;
-        if (sessions != null) {
-            sessions.removeCallback(adapter);
-            sessions.removeTitleChangedListener(adapter);
-        }
-        if (adapter != null) {
-            adapter.setSessions(null);
-        }
-        unbindService(mTSConnection);
+    Intent TSIntent = new Intent(this, TermService.class);
+    if (!bindService(TSIntent, mTSConnection, BIND_AUTO_CREATE)) {
+      Log.w(TermDebug.LOG_TAG, "bind to service failed!");
     }
+  }
 
-    private void populateList() {
-        sessions = mTermService.getSessions();
-        WindowListAdapter adapter = mWindowListAdapter;
+  @Override
+  protected void onPause() {
+    super.onPause();
 
-        if (adapter == null) {
-            adapter = new WindowListAdapter(sessions);
-            setListAdapter(adapter);
-            mWindowListAdapter = adapter;
-        } else {
-            adapter.setSessions(sessions);
-        }
-        sessions.addCallback(adapter);
-        sessions.addTitleChangedListener(adapter);
+    WindowListAdapter adapter = mWindowListAdapter;
+    if (sessions != null) {
+      sessions.removeCallback(adapter);
+      sessions.removeTitleChangedListener(adapter);
     }
+    if (adapter != null) {
+      adapter.setSessions(null);
+    }
+    unbindService(mTSConnection);
+  }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        Intent data = new Intent();
-        data.putExtra(Term.EXTRA_WINDOW_ID, position-1);
-        setResult(RESULT_OK, data);
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case ActionBarCompat.ID_HOME:
+        // Action bar home button selected
         finish();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+  }
+
+  private void populateList() {
+    sessions = mTermService.getSessions();
+    WindowListAdapter adapter = mWindowListAdapter;
+
+    if (adapter == null) {
+      adapter = new WindowListAdapter(sessions);
+      setListAdapter(adapter);
+      mWindowListAdapter = adapter;
+    } else {
+      adapter.setSessions(sessions);
+    }
+    sessions.addCallback(adapter);
+    sessions.addTitleChangedListener(adapter);
+  }
+
+  @Override
+  protected void onListItemClick(ListView l, View v, int position, long id) {
+    Intent data = new Intent();
+    data.putExtra(Term.EXTRA_WINDOW_ID, position - 1);
+    setResult(RESULT_OK, data);
+    finish();
+  }
+
+  /**
+   * View which isn't automatically in the pressed state if its parent is
+   * pressed.  This allows the window's entry to be pressed without the close
+   * button being triggered.
+   * Idea and code shamelessly borrowed from the Android browser's tabs list.
+   *
+   * Used by layout xml.
+   */
+  public static class CloseButton extends ImageView {
+
+    public CloseButton(Context context) {
+      super(context);
+    }
+
+    public CloseButton(Context context, AttributeSet attrs) {
+      super(context, attrs);
+    }
+
+    public CloseButton(Context context, AttributeSet attrs, int style) {
+      super(context, attrs, style);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case ActionBarCompat.ID_HOME:
-            // Action bar home button selected
-            finish();
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+    public void setPressed(boolean pressed) {
+      if (pressed && ((View) getParent()).isPressed()) {
+        return;
+      }
+      super.setPressed(pressed);
     }
+  }
 }

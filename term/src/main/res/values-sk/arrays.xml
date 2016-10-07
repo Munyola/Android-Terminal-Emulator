@@ -22,19 +22,19 @@
   </string-array>
 
   <string-array name="entries_actionbar_preference">
-      <item>Vždy zobraziť panel akcií</item>
-      <item>Skryť panel akcií (pre zobrazenie sa dotknite vrchu obrazovky alebo tlačidla Ponuka)</item>
+    <item>Vždy zobraziť panel akcií</item>
+    <item>Skryť panel akcií (pre zobrazenie sa dotknite vrchu obrazovky alebo tlačidla Ponuka)</item>
   </string-array>
 
   <string-array name="entries_cursorblink_preference">
     <item>Neblikajúci kurzor</item>
     <item>Blikajúci kurzor</item>
   </string-array>
-  
+
   <string-array name="entries_orientation_preference">
-        <item>Automatická</item>
-        <item>Na šírku</item>
-        <item>Na výšku</item>
+    <item>Automatická</item>
+    <item>Na šírku</item>
+    <item>Na výšku</item>
   </string-array>
 
   <string-array name="entries_cursorstyle_preference">
@@ -81,11 +81,11 @@
   </string-array>
 
   <string-array name="entries_backaction_preference">
-      <item>Zavrieť všetky okná terminálu</item>
-      <item>Zavrieť iba aktuálne okno terminálu</item>
-      <item>Zavrieť aktivitu, ponechať reláciu bežiacou</item>
-      <item>Odoslať ESC do terminálu</item>
-      <item>Odoslať TAB do terminálu</item>
+    <item>Zavrieť všetky okná terminálu</item>
+    <item>Zavrieť iba aktuálne okno terminálu</item>
+    <item>Zavrieť aktivitu, ponechať reláciu bežiacou</item>
+    <item>Odoslať ESC do terminálu</item>
+    <item>Odoslať TAB do terminálu</item>
   </string-array>
 
   <string-array name="entries_controlkey_preference">

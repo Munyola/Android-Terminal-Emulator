@@ -23,126 +23,145 @@ import android.widget.SpinnerAdapter;
  * Provides ActionBar APIs.
  */
 public abstract class ActionBarCompat {
-    public static final int NAVIGATION_MODE_STANDARD = 0;
-    public static final int NAVIGATION_MODE_LIST = 1;
-    public static final int NAVIGATION_MODE_TABS = 2;
-    public static final int DISPLAY_USE_LOGO = 1;
-    public static final int DISPLAY_SHOW_HOME = 2;
-    public static final int DISPLAY_HOME_AS_UP = 4;
-    public static final int DISPLAY_SHOW_TITLE = 8;
-    public static final int DISPLAY_SHOW_CUSTOM = 16;
 
-    // Provides android.R.id.home from API 11 and up
-    public static final int ID_HOME = 0x0102002c;
+  public static final int NAVIGATION_MODE_STANDARD = 0;
+  public static final int NAVIGATION_MODE_LIST = 1;
+  public static final int NAVIGATION_MODE_TABS = 2;
+  public static final int DISPLAY_USE_LOGO = 1;
+  public static final int DISPLAY_SHOW_HOME = 2;
+  public static final int DISPLAY_HOME_AS_UP = 4;
+  public static final int DISPLAY_SHOW_TITLE = 8;
+  public static final int DISPLAY_SHOW_CUSTOM = 16;
 
-    public interface OnNavigationListener {
-        public abstract boolean onNavigationItemSelected(int position, long id);
+  // Provides android.R.id.home from API 11 and up
+  public static final int ID_HOME = 0x0102002c;
+
+  public static ActionBarCompat wrap(Object actionBar) {
+    if (actionBar != null) {
+      if (AndroidCompat.SDK >= 11) {
+        return new ActionBarApi11OrLater(actionBar);
+      }
     }
+    return null;
+  }
 
-    public static ActionBarCompat wrap(Object actionBar) {
-        if (actionBar != null) {
-            if (AndroidCompat.SDK >= 11) {
-                return new ActionBarApi11OrLater(actionBar);
-            }
-        }
-        return null;
-    }
+  public abstract int getDisplayOptions();
 
-    public abstract int getDisplayOptions();
-    public abstract int getHeight();
-    public abstract int getNavigationItemCount();
-    public abstract int getNavigationMode();
-    public abstract int getSelectedNavigationIndex();
-    public abstract CharSequence getTitle();
-    public abstract void hide();
-    public abstract boolean isShowing();
-    public abstract void setDisplayOptions(int options);
-    public abstract void setDisplayOptions(int options, int mask);
-    public abstract void setListNavigationCallbacks(SpinnerAdapter adapter, OnNavigationListener callback);
-    public abstract void setNavigationMode(int mode);
-    public abstract void setSelectedNavigationItem(int position);
-    public abstract void setTitle(int resId);
-    public abstract void setTitle(CharSequence title);
-    public abstract void show();
+  public abstract void setDisplayOptions(int options);
+
+  public abstract int getHeight();
+
+  public abstract int getNavigationItemCount();
+
+  public abstract int getNavigationMode();
+
+  public abstract void setNavigationMode(int mode);
+
+  public abstract int getSelectedNavigationIndex();
+
+  public abstract CharSequence getTitle();
+
+  public abstract void setTitle(CharSequence title);
+
+  public abstract void hide();
+
+  public abstract boolean isShowing();
+
+  public abstract void setDisplayOptions(int options, int mask);
+
+  public abstract void setListNavigationCallbacks(SpinnerAdapter adapter, OnNavigationListener callback);
+
+  public abstract void setSelectedNavigationItem(int position);
+
+  public abstract void setTitle(int resId);
+
+  public abstract void show();
+
+  public interface OnNavigationListener {
+
+    public abstract boolean onNavigationItemSelected(int position, long id);
+  }
 }
 
 class ActionBarApi11OrLater extends ActionBarCompat {
-    private ActionBar bar;
 
-    ActionBarApi11OrLater(Object bar) {
-        this.bar = (ActionBar) bar;
-    }
+  private ActionBar bar;
 
-    private ActionBar.OnNavigationListener wrapOnNavigationCallback(OnNavigationListener callback) {
-        final OnNavigationListener cb = callback;
-        return new ActionBar.OnNavigationListener() {
-            public boolean onNavigationItemSelected(int position, long id) {
-                return cb.onNavigationItemSelected(position, id);
-            }
-        };
-    }
+  ActionBarApi11OrLater(Object bar) {
+    this.bar = (ActionBar) bar;
+  }
 
-    public int getDisplayOptions() {
-        return bar.getDisplayOptions();
-    }
+  private ActionBar.OnNavigationListener wrapOnNavigationCallback(OnNavigationListener callback) {
+    final OnNavigationListener cb = callback;
+    return new ActionBar.OnNavigationListener() {
 
-    public int getHeight() {
-        return bar.getHeight();
-    }
+      public boolean onNavigationItemSelected(int position, long id) {
+        return cb.onNavigationItemSelected(position, id);
+      }
+    };
+  }
 
-    public int getNavigationItemCount() {
-        return bar.getNavigationItemCount();
-    }
+  public int getDisplayOptions() {
+    return bar.getDisplayOptions();
+  }
 
-    public int getNavigationMode() {
-        return bar.getNavigationMode();
-    }
+  public int getHeight() {
+    return bar.getHeight();
+  }
 
-    public int getSelectedNavigationIndex() {
-        return bar.getSelectedNavigationIndex();
-    }
+  public int getNavigationItemCount() {
+    return bar.getNavigationItemCount();
+  }
 
-    public CharSequence getTitle() {
-        return bar.getTitle();
-    }
+  public int getNavigationMode() {
+    return bar.getNavigationMode();
+  }
 
-    public void hide() {
-        bar.hide();
-    }
+  public int getSelectedNavigationIndex() {
+    return bar.getSelectedNavigationIndex();
+  }
 
-    public boolean isShowing() {
-        return bar.isShowing();
-    }
+  public CharSequence getTitle() {
+    return bar.getTitle();
+  }
 
-    public void setDisplayOptions(int options) {
-        bar.setDisplayOptions(options);
-    }
+  public void hide() {
+    bar.hide();
+  }
 
-    public void setDisplayOptions(int options, int mask) {
-        bar.setDisplayOptions(options, mask);
-    }
+  public boolean isShowing() {
+    return bar.isShowing();
+  }
 
-    public void setListNavigationCallbacks(SpinnerAdapter adapter, OnNavigationListener callback) {
-        bar.setListNavigationCallbacks(adapter, wrapOnNavigationCallback(callback));
-    }
+  public void setTitle(CharSequence title) {
+    bar.setTitle(title);
+  }
 
-    public void setNavigationMode(int mode) {
-        bar.setNavigationMode(mode);
-    }
+  public void show() {
+    bar.show();
+  }
 
-    public void setSelectedNavigationItem(int position) {
-        bar.setSelectedNavigationItem(position);
-    }
+  public void setNavigationMode(int mode) {
+    bar.setNavigationMode(mode);
+  }
 
-    public void setTitle(int resId) {
-        bar.setTitle(resId);
-    }
+  public void setSelectedNavigationItem(int position) {
+    bar.setSelectedNavigationItem(position);
+  }
 
-    public void setTitle(CharSequence title) {
-        bar.setTitle(title);
-    }
+  public void setTitle(int resId) {
+    bar.setTitle(resId);
+  }
 
-    public void show() {
-        bar.show();
-    }
+  public void setDisplayOptions(int options) {
+    bar.setDisplayOptions(options);
+  }
+
+  public void setDisplayOptions(int options, int mask) {
+    bar.setDisplayOptions(options, mask);
+  }
+
+  public void setListNavigationCallbacks(SpinnerAdapter adapter, OnNavigationListener callback) {
+    bar.setListNavigationCallbacks(adapter, wrapOnNavigationCallback(callback));
+  }
 }

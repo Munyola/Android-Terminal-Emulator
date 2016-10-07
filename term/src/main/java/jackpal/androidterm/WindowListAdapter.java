@@ -26,89 +26,90 @@ import android.widget.TextView;
 
 import jackpal.androidterm.emulatorview.TermSession;
 import jackpal.androidterm.emulatorview.UpdateCallback;
-
 import jackpal.androidterm.util.SessionList;
 
 public class WindowListAdapter extends BaseAdapter implements UpdateCallback {
-    private SessionList mSessions;
 
-    public WindowListAdapter(SessionList sessions) {
-        setSessions(sessions);
+  private SessionList mSessions;
+
+  public WindowListAdapter(SessionList sessions) {
+    setSessions(sessions);
+  }
+
+  private static Activity findActivityFromContext(Context context) {
+    if (context == null) {
+      return null;
+    } else if (context instanceof Activity) {
+      return (Activity) context;
+    } else if (context instanceof ContextWrapper) {
+      ContextWrapper cw = (ContextWrapper) context;
+      return findActivityFromContext(cw.getBaseContext());
     }
+    return null;
+  }
 
-    public void setSessions(SessionList sessions) {
-        mSessions = sessions;
+  public void setSessions(SessionList sessions) {
+    mSessions = sessions;
 
-        if (sessions != null) {
-            sessions.addCallback(this);
-            sessions.addTitleChangedListener(this);
-        } else {
-            onUpdate();
+    if (sessions != null) {
+      sessions.addCallback(this);
+      sessions.addTitleChangedListener(this);
+    } else {
+      onUpdate();
+    }
+  }
+
+  public int getCount() {
+    if (mSessions != null) {
+      return mSessions.size();
+    } else {
+      return 0;
+    }
+  }
+
+  public Object getItem(int position) {
+    return mSessions.get(position);
+  }
+
+  public long getItemId(int position) {
+    return position;
+  }
+
+  public View getView(int position, View convertView, ViewGroup parent) {
+    Activity act = findActivityFromContext(parent.getContext());
+    View child = act.getLayoutInflater().inflate(R.layout.window_list_item, parent, false);
+    View close = child.findViewById(R.id.window_list_close);
+
+    TextView label = (TextView) child.findViewById(R.id.window_list_label);
+    String defaultTitle = act.getString(R.string.window_title, position + 1);
+    label.setText(getSessionTitle(position, defaultTitle));
+
+    final SessionList sessions = mSessions;
+    final int closePosition = position;
+    close.setOnClickListener(new View.OnClickListener() {
+
+      public void onClick(View v) {
+        TermSession session = sessions.remove(closePosition);
+        if (session != null) {
+          session.finish();
+          notifyDataSetChanged();
         }
+      }
+    });
+
+    return child;
+  }
+
+  protected String getSessionTitle(int position, String defaultTitle) {
+    TermSession session = mSessions.get(position);
+    if (session != null && session instanceof GenericTermSession) {
+      return ((GenericTermSession) session).getTitle(defaultTitle);
+    } else {
+      return defaultTitle;
     }
+  }
 
-    public int getCount() {
-        if (mSessions != null) {
-            return mSessions.size();
-        } else {
-            return 0;
-        }
-    }
-
-    public Object getItem(int position) {
-        return mSessions.get(position);
-    }
-
-    public long getItemId(int position) {
-        return position;
-    }
-
-    protected String getSessionTitle(int position, String defaultTitle) {
-        TermSession session = mSessions.get(position);
-        if (session != null && session instanceof GenericTermSession) {
-            return ((GenericTermSession) session).getTitle(defaultTitle);
-        } else {
-            return defaultTitle;
-        }
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Activity act = findActivityFromContext(parent.getContext());
-        View child = act.getLayoutInflater().inflate(R.layout.window_list_item, parent, false);
-        View close = child.findViewById(R.id.window_list_close);
-
-        TextView label = (TextView) child.findViewById(R.id.window_list_label);
-        String defaultTitle = act.getString(R.string.window_title, position+1);
-        label.setText(getSessionTitle(position, defaultTitle));
-
-        final SessionList sessions = mSessions;
-        final int closePosition = position;
-        close.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                TermSession session = sessions.remove(closePosition);
-                if (session != null) {
-                    session.finish();
-                    notifyDataSetChanged();
-                }
-            }
-        });
-
-        return child;
-    }
-
-    public void onUpdate() {
-        notifyDataSetChanged();
-    }
-
-    private static Activity findActivityFromContext(Context context) {
-        if (context == null) {
-            return null;
-        } else if (context instanceof Activity) {
-            return (Activity) context;
-        } else if (context instanceof ContextWrapper) {
-            ContextWrapper cw = (ContextWrapper) context;
-            return findActivityFromContext(cw.getBaseContext());
-        }
-        return null;
-    }
+  public void onUpdate() {
+    notifyDataSetChanged();
+  }
 }
