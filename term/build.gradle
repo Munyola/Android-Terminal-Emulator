@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 22
-  buildToolsVersion "22.0.1"
+  compileSdkVersion 24
+  buildToolsVersion "24.0.3"
 
   defaultConfig {
-//    applicationId "jackpal.androidterm"
-    minSdkVersion 4
-    targetSdkVersion 22
+    minSdkVersion 11
+    targetSdkVersion 24
 
     ndk {
       moduleName "libjackpal-androidterm5"
@@ -20,20 +19,11 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_7
     targetCompatibility JavaVersion.VERSION_1_7
   }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-    }
-  }
 }
 
 dependencies {
   compile 'com.jrummyapps:androidterm-emulatorview:1.0.0'
   compile 'com.jrummyapps:androidterm-libtermexec:1.0.0'
-//  compile project(':emulatorview')
-//  compile project(':libtermexec')
 }
 
 apply from: 'publication.gradle'

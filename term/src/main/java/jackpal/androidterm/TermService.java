@@ -68,16 +68,27 @@ public class TermService extends Service implements TermSession.FinishCallback {
     compat = new ServiceForegroundCompat(this);
     mTermSessions = new SessionList();
 
-        /* Put the service in the foreground. */
-    Notification notification =
-        new Notification(R.drawable.ic_stat_service_notification_icon, getText(R.string.service_notify_text),
-            System.currentTimeMillis());
-    notification.flags |= Notification.FLAG_ONGOING_EVENT;
+    /* Put the service in the foreground. */
     Intent notifyIntent = new Intent(this, Term.class);
     notifyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0);
-    notification.setLatestEventInfo(this, getText(R.string.application_terminal), getText(R.string.service_notify_text),
-        pendingIntent);
+
+    Notification.Builder builder = new Notification.Builder(this)
+        .setContentIntent(pendingIntent)
+        .setSmallIcon(R.drawable.ic_stat_service_notification_icon)
+        .setTicker(getString(R.string.service_notify_text))
+        .setWhen(System.currentTimeMillis())
+        .setOngoing(true)
+        .setContentTitle(getString(R.string.application_terminal));
+
+    /* Put the service in the foreground. */
+    Notification notification;
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+      notification = builder.build();
+    } else {
+      notification = builder.getNotification();
+    }
+
     compat.startForeground(RUNNING_NOTIFICATION, notification);
 
     Log.d(TermDebug.LOG_TAG, "TermService started");
