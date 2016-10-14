@@ -1,17 +1,17 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion 22
   buildToolsVersion "22.0.1"
 
   defaultConfig {
-    applicationId "jackpal.androidterm"
+//    applicationId "jackpal.androidterm"
     minSdkVersion 4
     targetSdkVersion 22
 
     ndk {
       moduleName "libjackpal-androidterm5"
-      abiFilters 'armeabi', 'mips', 'x86'
+      abiFilters 'all'
       ldLibs "log"
     }
   }
@@ -30,6 +30,10 @@ android {
 }
 
 dependencies {
-  compile project(':emulatorview')
-  compile project(':libtermexec')
+  compile 'com.jrummyapps:androidterm-emulatorview:1.0.0'
+  compile 'com.jrummyapps:androidterm-libtermexec:1.0.0'
+//  compile project(':emulatorview')
+//  compile project(':libtermexec')
 }
+
+apply from: 'publication.gradle'

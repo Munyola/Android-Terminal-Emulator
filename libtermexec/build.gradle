@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.0'
+    classpath 'com.android.tools.build:gradle:2.2.1'
   }
 }
 apply plugin: 'com.android.library'
@@ -57,3 +57,5 @@ dependencies {
 
   compile 'com.android.support:support-annotations:21.0.0'
 }
+
+apply from: 'publication.gradle'
