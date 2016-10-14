@@ -101,6 +101,7 @@ class TermKeyListener {
   private int mBackKeyCode;
   private boolean mAltSendsEsc;
   private int mCombiningAccent;
+
   /**
    * Construct a term key listener.
    */

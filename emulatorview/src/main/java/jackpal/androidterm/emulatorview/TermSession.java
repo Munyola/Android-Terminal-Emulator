@@ -104,6 +104,7 @@ public class TermSession {
     }
   };
   private UpdateCallback mTitleChangedListener;
+
   public TermSession() {
     this(false);
   }
@@ -178,7 +179,9 @@ public class TermSession {
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
-      }      @Override
+      }
+
+      @Override
       public void run() {
         Looper.prepare();
 
@@ -199,7 +202,6 @@ public class TermSession {
 
         Looper.loop();
       }
-
 
     };
     mWriterThread.setName("TermSession output writer");

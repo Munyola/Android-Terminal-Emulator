@@ -19,7 +19,6 @@ package jackpal.androidterm.emulatorview;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.FloatMath;
 
 class PaintRenderer extends BaseTextRenderer {
 
@@ -29,6 +28,7 @@ class PaintRenderer extends BaseTextRenderer {
   private int mCharHeight;
   private int mCharAscent;
   private int mCharDescent;
+
   public PaintRenderer(int fontSize, ColorScheme scheme) {
     super(scheme);
     mTextPaint = new Paint();
@@ -36,8 +36,8 @@ class PaintRenderer extends BaseTextRenderer {
     mTextPaint.setAntiAlias(true);
     mTextPaint.setTextSize(fontSize);
 
-    mCharHeight = (int) FloatMath.ceil(mTextPaint.getFontSpacing());
-    mCharAscent = (int) FloatMath.ceil(mTextPaint.ascent());
+    mCharHeight = (int) Math.ceil(mTextPaint.getFontSpacing());
+    mCharAscent = (int) Math.ceil(mTextPaint.ascent());
     mCharDescent = mCharHeight + mCharAscent;
     mCharWidth = mTextPaint.measureText(EXAMPLE_CHAR, 0, 1);
   }
